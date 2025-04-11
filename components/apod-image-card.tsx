@@ -12,17 +12,20 @@ export default function ApodImageCard({ apod, className = '' }: ApodImageCardPro
 
   return (
     <div className={`${className} max-w-2xl mx-auto`}>
-      <AspectRatio ratio={16 / 9} className="bg-gray-50 dark:bg-gray-900 overflow-hidden rounded-lg">
-        {apod.media_type === 'image' ? (
+      {apod.media_type === 'image' ? (
+        <div className="relative w-full bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden">
           <Image 
             src={apod.url} 
             alt={apod.title}
-            fill
+            width={1200}
+            height={800}
             priority
-            className="object-cover"
+            className="w-full h-auto"
             sizes="(max-width: 672px) 100vw, 672px"
           />
-        ) : isYouTube ? (
+        </div>
+      ) : isYouTube ? (
+        <AspectRatio ratio={16 / 9} className="bg-gray-50 dark:bg-gray-900 overflow-hidden rounded-lg">
           <div className="w-full h-full bg-black">
             <iframe
               src={apod.url.replace('watch?v=', 'embed/')}
@@ -32,7 +35,9 @@ export default function ApodImageCard({ apod, className = '' }: ApodImageCardPro
               className="w-full h-full"
             />
           </div>
-        ) : (
+        </AspectRatio>
+      ) : (
+        <AspectRatio ratio={16 / 9} className="bg-gray-50 dark:bg-gray-900 overflow-hidden rounded-lg">
           <div className="w-full h-full bg-black">
             <video 
               src={apod.url} 
@@ -44,8 +49,8 @@ export default function ApodImageCard({ apod, className = '' }: ApodImageCardPro
               Your browser does not support the video tag.
             </video>
           </div>
-        )}
-      </AspectRatio>
+        </AspectRatio>
+      )}
     </div>
   );
 } 

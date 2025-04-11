@@ -8,7 +8,8 @@ export async function fetchApod(date?: string): Promise<ApodData> {
 
   const res = await fetch(url, {
     next: {
-      revalidate: date ? 31536000 : 86400 // Cache past dates for a year, today's date for 24 hours
+      // Only cache past dates for a year, don't cache today's date
+      revalidate: date ? 31536000 : 0
     }
   });
   

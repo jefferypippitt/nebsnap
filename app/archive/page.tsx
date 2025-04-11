@@ -1,16 +1,19 @@
 import { DatePicker } from '@/components/date-picker';
 import { fetchApod } from '@/lib/nasaApi';
 import Link from 'next/link';
-import { format, subDays } from 'date-fns';
+import { format, startOfMonth, eachDayOfInterval } from 'date-fns';
 
 async function getCurrentMonthApods() {
   const today = new Date();
   const apods = [];
-  const currentDay = today.getDate();
   
   // Get all days in the current month up to today
-  for (let i = 0; i < currentDay; i++) {
-    const date = subDays(today, i);
+  const monthStart = startOfMonth(today);
+  const monthEnd = today; // Only go up to today, not end of month
+  const daysInMonth = eachDayOfInterval({ start: monthStart, end: monthEnd });
+  
+  // Fetch APODs for each day in the current month up to today
+  for (const date of daysInMonth) {
     const formattedDate = format(date, 'yyyy-MM-dd');
     try {
       const apod = await fetchApod(formattedDate);
@@ -20,7 +23,7 @@ async function getCurrentMonthApods() {
     }
   }
   
-  return apods.reverse(); // Show oldest to newest
+  return apods.reverse();
 }
 
 export default async function Archive() {
