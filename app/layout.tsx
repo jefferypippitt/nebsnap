@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nebscape",
+  title: "Nebsnap",
   description: "apod clone from nasa.gov",
 };
 

@@ -14,7 +14,7 @@ export function Navbar() {
             href="/" 
             className="text-xl font-light tracking-tight"
           >
-            Nebscape
+            Nebsnap
           </Link>
           
           <div className="flex gap-8">
