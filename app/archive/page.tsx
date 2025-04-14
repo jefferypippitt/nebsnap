@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { DatePicker } from '@/components/date-picker';
 import { fetchApod } from '@/lib/nasaApi';
 import Link from 'next/link';
